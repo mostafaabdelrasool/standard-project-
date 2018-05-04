@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Mapprovider</id>
+    <version>0.0.0</version>
+    <authors>AirSupport</authors>
+    <owners>AirSupport</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>None</description>
+    <releaseNotes>None</releaseNotes>
+    <copyright>Copyright 2018</copyright>    
+  </metadata>
+  <files>
+    <!-- copy all the files in dist folder to a nuget package, except for the config.js -->
+    <file src="dist\**\*.*" target="." exclude="dist\assets\js\config.js"/>
+    <!-- copy our config.template.js file as the config.js -->
+    <file src="src\app\config\config.template.js" target="assets\js\config.js" />
+  </files>
+</package>

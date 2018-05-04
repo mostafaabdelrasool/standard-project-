@@ -1,0 +1,22 @@
+<h1 class="title" matDialogTitle>{{( track$ | async )?.entity.text}}</h1>
+<div class="divider modal-divider"></div>
+
+<mat-dialog-content mat-dialog-content class="( track$ | async )-dialog">
+    <div class="dialog-line">
+        <label>Location:</label>
+        <span>
+            {{( track$ | async )?.entity?.geographic.lat}}&deg;<small><i>lat</i></small> 
+            {{( track$ | async )?.entity?.geographic.lng}}&deg;<small><i>long</i></small>
+        </span>
+    </div>
+    <div class="dialog-line">
+        <label>Altitude:</label>
+        <span>
+            {{( track$ | async )?.entity?.alt?.toFixed(0)}} <small><i>feet</i></small>
+        </span>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+    <button class="action-button" matDialogClose mat-raised-button>Close</button>
+</mat-dialog-actions>

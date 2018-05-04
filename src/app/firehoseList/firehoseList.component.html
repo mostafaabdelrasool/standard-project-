@@ -1,0 +1,24 @@
+<mat-dialog-content mat-dialog-content class="( track$ | async )-dialog">
+    <table class="table table-striped table-selection">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">lat</th>
+                <th scope="col">lng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of tracks$ | async">
+                <td>{{item.entity.text}}</td>
+                <td>{{item.entity.geographic.lat}} </td>
+                <td>{{item.entity.geographic.lng}}</td>
+            </tr>
+        </tbody>
+    </table>
+</mat-dialog-content>
+
+
+
+<mat-dialog-actions class="dialog-actions">
+    <button class="action-button" matDialogClose mat-raised-button>Close</button>
+</mat-dialog-actions>

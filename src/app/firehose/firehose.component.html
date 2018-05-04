@@ -1,0 +1,110 @@
+<ac-map id="main-map">
+  <div class="as-custom-toolbar">
+    <button (click)='showPopup()' mat-mini-fab>
+      <mat-icon>list</mat-icon>
+    </button>
+  </div>
+  <ac-map-layer-provider [provider]="MapLayerProviderOptions.OpenStreetMap" [options]="{
+                url : 'https://a.tile.openstreetmap.org/'
+         }">
+  </ac-map-layer-provider>
+
+  <ac-layer acFor="let track of track$" [context]="this" [store]="true">
+    <ac-billboard-desc props="{
+        image: '/assets/plane.png',
+        position: track.position ,
+        name: track.text,
+        rotation: track.rotation,
+        color:currentAc && currentAc.text===track.text?Cesium.Color.RED:Cesium.Color.BLUE
+      }">
+    </ac-billboard-desc>
+    <ac-label-primitive-desc props="{
+      position: track.position,
+      pixelOffset : [-15,25] | pixelOffset,
+      text: track.text,
+      font: '30px sans-serif',
+      scale: 0.5,
+      fillColor: Cesium.Color.BLACK,
+  }">
+    </ac-label-primitive-desc>
+    <ac-polyline-desc props="{
+      width : 2,
+      positions: track.positions,
+      material:polylineMaterial,
+      show:currentAc && currentAc.text===track.text?true:false
+  }">
+    </ac-polyline-desc>
+    <ac-polyline-desc props="{
+      width : 2,
+      positions:track.waypoints? track.waypoints.position:[],
+      material:polylineDashed,
+      show: currentAc && currentAc.text===track.text?true:false
+  }">
+    </ac-polyline-desc>
+
+    <!-- <ac-label-primitive-desc props="{
+      position: track.position,
+      text: track.text,
+      font: '30px sans-serif',
+      scale: 0.5
+  }">
+    </ac-label-primitive-desc>
+    <ac-point-desc props="{
+      pixelSize : 10,
+      position : track.position,      
+      color: Cesium.Color.BLACK 
+    }">
+    </ac-point-desc> -->
+  </ac-layer>
+  <as-html  [props]="{position: currentAc?.position}" [(show)]="showPopover">
+    <div >
+      <h4>{{currentAc?.text}}</h4>
+      <div class="dialog-line">
+        <label>Location:</label>
+        <span>
+          {{currentAc?.geographic.lat}}&deg;
+          <small>
+            <i>lat</i>
+          </small>
+          {{currentAc?.geographic.lng}}&deg;
+          <small>
+            <i>long</i>
+          </small>
+        </span>
+      </div>
+      <div class="dialog-line">
+        <label>Altitude:</label>
+        <span>
+          {{currentAc?.geographic.alt}}
+          <small>
+            <i>feet</i>
+          </small>
+        </span>
+      </div>
+      <div class="dialog-line">
+        <label>Squawk:</label>
+        <span>
+          {{currentAc?.squawk}}
+        </span>
+      </div>
+      <div class="dialog-line">
+        <label>Ground Speed:</label>
+        <span>
+          {{currentAc?.gs}}
+        </span>
+      </div>
+      <div class="dialog-line">
+        <label>Orig:</label>
+        <span>
+          {{currentAc?.orieg}}
+        </span>
+      </div>
+      <div class="dialog-line">
+        <label>Dest:</label>
+        <span>
+          {{currentAc?.dest}}
+        </span>
+      </div>
+    </div>
+  </as-html>
+</ac-map>

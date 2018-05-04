@@ -1,0 +1,14 @@
+.html-close{
+    position: absolute;
+    right: 4px;
+}
+:host {
+    position: absolute;
+    z-index: 100;
+    transition: all .5s;
+    background: white;
+    padding: 5px;
+    border-radius: 2%;
+    margin-top: 20px;
+    border: 2px solid #1293b96e;
+}
